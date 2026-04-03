@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI UPRISING COURSE - Master AI from Zero to Hero | Sochlo</title>
+    <meta name="description" content="Join AI UPRISING COURSE by Sochlo. Learn AI from 0 to 100 with expert guidance, regular sessions, and hands-on training. Transform your future with AI mastery.">
+    
+    <!-- Razorpay SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #00A8CC;
+            --secondary: #FF3D71;
+            --dark: #0A0E27;
+            --dark-card: #141834;
+            --text: #E8EAED;
+            --text-secondary: #A0A4B8;
+            --success: #00FF88;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0A0E27 0%, #1a1f3a 100%);
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 61, 113, 0.1) 0%, transparent 50%);
+            animation: bgMove 20s ease-in-out infinite;
+        }
+
+        @keyframes bgMove {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-50px, -50px); }
+        }
+
+        /* Grid pattern */
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.5;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 14, 39, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--dark);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 5%;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #fff 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .price-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--success);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .price-tag span {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--secondary) 0%, #ff6b9d 100%);
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: inline-block;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(255, 61, 113, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(255, 61, 113, 0.5);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 217, 255, 0.03) 100%);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, white 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--dark-card);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--dark-card);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--success);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Registration Section */
+        .registration {
+            padding: 6rem 5%;
+            background: linear-gradient(180deg, rgba(0, 217, 255, 0.03) 0%, transparent 100%);
+        }
+
+        .registration-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--dark-card);
+            padding: 3rem;
+            border-radius: 30px;
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 217, 255, 0.05);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--secondary) 0%, #ff6b9d 100%);
+            color: white;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(255, 61, 113, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+        }
+
+        .social-links {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Success Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--dark-card);
+            padding: 3rem;
+            border-radius: 30px;
+            text-align: center;
+            border: 2px solid var(--success);
+            max-width: 500px;
+            animation: modalPop 0.3s ease-out;
+        }
+
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .price-tag {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="grid-pattern"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">SOCHLO</div>
+        <a href="#register" class="nav-cta">Enroll Now</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🚀 New Batch Starting Soon</div>
+            <h1>AI UPRISING COURSE</h1>
+            <p>Master Artificial Intelligence from Zero to Hero. Transform your future with comprehensive AI training, expert mentorship, and hands-on projects.</p>
+            
+            <div class="price-tag">
+                ₹1,499 <span>Only</span>
+            </div>
+            
+            <a href="#register" class="cta-button">Start Your AI Journey →</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">What You'll Master</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Fundamentals</h3>
+                <p>Build a rock-solid foundation in artificial intelligence, machine learning, and deep learning concepts from scratch.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💡</div>
+                <h3>Hands-On Projects</h3>
+                <p>Work on real-world AI projects that build your portfolio and prepare you for industry challenges.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">👨‍🏫</div>
+                <h3>Expert Mentorship</h3>
+                <p>Learn from industry professionals with years of experience in AI and machine learning development.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Structured Curriculum</h3>
+                <p>Follow our carefully designed timetable with regular sessions that take you from beginner to advanced level.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Career Ready Skills</h3>
+                <p>Gain practical skills in Python, TensorFlow, PyTorch, and other cutting-edge AI tools and frameworks.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Community Support</h3>
+                <p>Join our exclusive WhatsApp community for 24/7 doubt solving, networking, and collaborative learning.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Why AI UPRISING?</h2>
+                <p>At Sochlo, we believe in empowering the next generation with cutting-edge AI skills. Our AI UPRISING COURSE is designed to take you from complete beginner to AI master through:</p>
+                <p>✓ Comprehensive 0-100 curriculum covering all essential AI topics<br>
+                   ✓ Regular live sessions with industry experts<br>
+                   ✓ Structured timetable for consistent learning<br>
+                   ✓ Real-world projects and case studies<br>
+                   ✓ Lifetime access to course materials<br>
+                   ✓ Certificate of completion</p>
+                <p>Our mission is to democratize AI education and make it accessible to everyone who has the passion to learn and grow.</p>
+            </div>
+            
+            <div class="about-stats">
+                <div class="stat-card">
+                    <span class="stat-number">100+</span>
+                    <div class="stat-label">Hours of Content</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">20+</span>
+                    <div class="stat-label">AI Projects</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">24/7</span>
+                    <div class="stat-label">Community Support</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">∞</span>
+                    <div class="stat-label">Career Opportunities</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section class="registration" id="register">
+        <h2 class="section-title">Secure Your Spot Now</h2>
+        <div class="registration-container">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="class">Class *</label>
+                        <input type="text" id="class" name="class" required placeholder="e.g., 12th, B.Tech 2nd Year">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age *</label>
+                        <input type="number" id="age" name="age" required min="10" max="100">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" placeholder="10-digit mobile number">
+                </div>
+
+                <div class="form-group">
+                    <label for="institution">School/College *</label>
+                    <input type="text" id="institution" name="institution" required>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Proceed to Payment - ₹1,499
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">✅</div>
+            <h2>Payment Successful!</h2>
+            <p>Welcome to AI UPRISING COURSE! You'll receive a confirmation email shortly with course details and WhatsApp community link.</p>
+            <p>Redirecting to WhatsApp community...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Sochlo. All rights reserved. | Empowering minds through AI education.</p>
+        <div class="social-links">
+            <p>Questions? Contact us at: <a href="mailto:support@sochlo.com" style="color: var(--primary);">support@sochlo.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // ===============================================
+        // RAZORPAY PAYMENT INTEGRATION
+        // ===============================================
+        
+        // IMPORTANT: Replace these with your actual Razorpay credentials
+        const RAZORPAY_KEY_ID = "YOUR_RAZORPAY_KEY_ID"; // Get from Razorpay Dashboard
+        const WHATSAPP_COMMUNITY_LINK = "https://chat.whatsapp.com/YOUR_INVITE_CODE"; // Your WhatsApp group invite link
+        
+        // Email sending endpoint (you need to set up a backend for this)
+        const EMAIL_WEBHOOK_URL = "YOUR_BACKEND_EMAIL_ENDPOINT"; // Your server endpoint to send emails
+
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                class: document.getElementById('class').value,
+                age: document.getElementById('age').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                institution: document.getElementById('institution').value
+            };
+            
+            // Razorpay payment options
+            const options = {
+                key: RAZORPAY_KEY_ID,
+                amount: 149900, // Amount in paise (₹1,499)
+                currency: "INR",
+                name: "Sochlo",
+                description: "AI UPRISING COURSE - Enrollment Fee",
+                image: "https://via.placeholder.com/150?text=SOCHLO", // Replace with your logo URL
+                prefill: {
+                    name: formData.name,
+                    email: formData.email,
+                    contact: formData.phone
+                },
+                theme: {
+                    color: "#00D9FF"
+                },
+                handler: async function(response) {
+                    // Payment successful
+                    console.log('Payment successful:', response);
+                    
+                    // Save user data to your backend/database
+                    await saveUserData({
+                        ...formData,
+                        paymentId: response.razorpay_payment_id,
+                        paymentStatus: 'success'
+                    });
+                    
+                    // Send confirmation email
+                    await sendConfirmationEmail(formData);
+                    
+                    // Show success modal
+                    document.getElementById('successModal').classList.add('active');
+                    
+                    // Redirect to WhatsApp community after 3 seconds
+                    setTimeout(() => {
+                        window.location.href = WHATSAPP_COMMUNITY_LINK;
+                    }, 3000);
+                },
+                modal: {
+                    ondismiss: function() {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Proceed to Payment - ₹1,499';
+                    }
+                }
+            };
+            
+            // Open Razorpay payment modal
+            const rzp = new Razorpay(options);
+            
+            rzp.on('payment.failed', function(response) {
+                alert('Payment failed. Please try again.');
+                console.error('Payment failed:', response.error);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Proceed to Payment - ₹1,499';
+            });
+            
+            rzp.open();
+        });
+        
+        // Function to save user data to backend
+        async function saveUserData(data) {
+            try {
+                // IMPORTANT: Replace this with your actual backend endpoint
+                // This should save the student data to your database
+                const response = await fetch('YOUR_BACKEND_ENDPOINT/save-enrollment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    console.error('Failed to save user data');
+                }
+            } catch (error) {
+                console.error('Error saving user data:', error);
+            }
+        }
+        
+        // Function to send confirmation email
+        async function sendConfirmationEmail(data) {
+            try {
+                // IMPORTANT: Replace this with your actual email sending endpoint
+                const emailData = {
+                    to: data.email,
+                    subject: 'Welcome to AI UPRISING COURSE - Enrollment Confirmed!',
+                    html: `
+                        <h2>Welcome to AI UPRISING COURSE, ${data.name}!</h2>
+                        <p>Your enrollment has been confirmed successfully.</p>
+                        <p><strong>Course Details:</strong></p>
+                        <ul>
+                            <li>Course: AI UPRISING COURSE</li>
+                            <li>Amount Paid: ₹1,499</li>
+                            <li>Student Name: ${data.name}</li>
+                            <li>Email: ${data.email}</li>
+                        </ul>
+                        <p><strong>Join our WhatsApp Community:</strong></p>
+                        <a href="${WHATSAPP_COMMUNITY_LINK}" style="background: #00D9FF; color: #0A0E27; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Join WhatsApp Group</a>
+                        <p>Classes will begin as per the timetable shared in the community.</p>
+                        <p>Best regards,<br>Team Sochlo</p>
+                    `
+                };
+                
+                await fetch(EMAIL_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(emailData)
+                });
+            } catch (error) {
+                console.error('Error sending email:', error);
+            }
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
